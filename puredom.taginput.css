@@ -1,0 +1,149 @@
+.puredom_taginput {
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	padding: 2px;
+	background: #FFF;
+	border: 1px solid #BBB;
+	border-top-color: #999;
+	border-bottom-color: #CCC;
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 0 #FFF, inset 0 1px 3px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 1px 0 #FFF, inset 0 1px 3px rgba(0,0,0,0.3);
+	box-shadow: 0 1px 0 #FFF, inset 0 1px 3px rgba(0,0,0,0.3);
+	
+	font-size: 100%;
+	color: #333;
+	text-align: left;
+	text-indent: 3px;
+	overflow: hidden;
+	cursor: text;
+}
+
+.puredom_taginput_inner {
+	top: 3px;
+	padding: 0 2px;
+	overflow: hidden;
+	cursor: text;
+}
+
+
+.puredom_taginput_taglist {
+	display: block;
+	top: -1px;
+	left: -1px;
+	padding: 2px 0 0 2px;
+	float: left;
+	clear: none;
+	cursor: text;
+	overflow: hidden;
+}
+
+.puredom_taginput_tag {
+	float: left;
+	clear: none;
+	padding: 3px 26px 3px 5px;
+	margin: 0 5px 5px 0;
+	background: #DDD;
+	border: 1px solid #AAA;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #595959;
+	-webkit-text-shadow: 0 1px 0 #FFF;
+	-moz-text-shadow: 0 1px 0 #FFF;
+	text-shadow: 0 1px 0 #FFF;
+	cursor: default;
+}
+.puredom_taginput_tag.tagInput_existsblink {
+	background: #BBB;
+	border-color: #999;
+	color: #444;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+}
+.puredom_taginput_tag.selected {
+	background: #0098E5;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 4px rgba(0,0,0,0.2);
+	border-color: #185DAB;
+	color: #FFF;
+	-webkit-text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	-moz-text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+	.puredom_taginput_tag .puredom_taginput_tag_label {
+		top: 0;
+	}
+
+.puredom_taginput_tag .puredom_taginput_tag_removeBtn {
+	position: absolute;
+	display: inline;
+	right: 4px;
+	top: 3px;
+	padding: 0 0.35em 0.35em 0.1em;
+	background: #C3C3C3;
+	border-radius: 0.65em;
+	-webkit-border-radius: 0.65em;
+	-moz-border-radius: 0.65em;
+	line-height: 0.9em;
+	color: #FFF;
+	font-weight: bold;
+	text-shadow: none;
+	-webkit-text-shadow: none;
+	-moz-text-shadow: none;
+	cursor: pointer;
+}
+.puredom_taginput_tag.selected .puredom_taginput_tag_removeBtn {
+	background: #185DAB;
+}
+.puredom_taginput_tag .puredom_taginput_tag_removeBtn:hover {
+	background: #F22;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	-webkit-text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	-moz-text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	color: #FFF;
+}
+
+.puredom_taginput_inputwrap {
+	display: block;
+	float: left;
+	clear: none;
+	width: 12em;
+	margin: 0 5px 5px 0;
+	background: none;
+	border: none;
+	cursor: text;
+}
+	body .puredom_taginput .puredom_taginput_inputwrap .puredom_taginput_input {
+		display: block;
+		float: left;
+		clear: none;
+		width: 12em;
+		margin: 0;
+		padding: 5px 3px;
+		background: #FFF;
+		border: none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		-webkit-outline: none;
+		-moz-outline: none;
+		outline: none;
+		font-size: 108%;
+		cursor: text;
+	}
+	body .puredom_taginput .puredom_taginput_inputwrap .puredom_taginput_input:focus {
+		border: none;
+	}
