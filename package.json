@@ -1,0 +1,25 @@
+{
+  "name": "puredom-taginput",
+  "version": "1.0.0",
+  "description": "A puredom plugin that adds support for <input type=\"tag\">",
+  "main": "puredom-taginput.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developit/puredom-taginput.git"
+  },
+  "keywords": [
+    "puredom",
+    "input",
+    "plugin",
+    "tags"
+  ],
+  "author": "Jason Miller <jason@developit.ca>",
+  "license": "BSD 3-Clause",
+  "bugs": {
+    "url": "https://github.com/developit/puredom-taginput/issues"
+  },
+  "homepage": "https://github.com/developit/puredom-taginput"
+}

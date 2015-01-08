@@ -1,27 +1,42 @@
-(function() {
-	
+(function(g, factory) {
+	if (typeof define==='function' && define.amd) {
+		define(['puredom'], factory);
+	}
+	else if (typeof module==='object' && typeof require==='function') {
+		module.exports = factory(require('puredom'));
+	}
+	else {
+		g.taginput = g['puredom-taginput'] = factory(window.puredom);
+	}
+}(this, function($) {
+	var exports = {
+		enhance : function(n) {
+			$(n).taginput();
+		}
+	};
+
 	function init() {
-		puredom.FormHandler.addCustomType(api);
-		
-		puredom.addNodeSelectionPlugin('taginput', function(enabled) {
+		$.FormHandler.addCustomType(api);
+
+		$.addNodeSelectionPlugin('taginput', function(enabled) {
 			return this.each(enabled===false ? api.destroy : api.enhance);
 		});
-		
-		puredom.addNodeSelectionPlugin('removetaginput', function() {
+
+		$.addNodeSelectionPlugin('removetaginput', function() {
 			return this.each(api.destroy);
 		});
 	}
-	
+
 	var api = {
-		
+
 		id : 'tags',
-		
+
 		types : ['tags', 'tag'],
-		
+
 		objs : [],
-		
+
 		createUI : function(obj) {
-			obj.ui = puredom.el({
+			obj.ui = $({
 				className : 'puredom_taginput',
 				attributes : {
 					'data-input' : obj.input.uuid()
@@ -54,9 +69,9 @@
 				parent : obj.input.parent()
 			});
 		},
-		
+
 		addTag : function(obj, tag) {
-			puredom.el({
+			$({
 				className : 'puredom_taginput_tag',
 				attributes : {
 					'data-tag' : tag
@@ -65,7 +80,7 @@
 					{
 						type : 'span',
 						className : 'puredom_taginput_tag_label',
-						innerHTML : tag ? puredom.htmlEntities(tag) : '&nbsp;'
+						innerHTML : tag ? $.htmlEntities(tag) : '&nbsp;'
 					},
 					{
 						type  : 'span',
@@ -75,11 +90,11 @@
 					}
 				],
 				onmousedown : obj.handlers.tagClick,
-				oncontextmenu : puredom.cancelEvent,
-				onselectstart : puredom.cancelEvent
+				oncontextmenu : $.cancelEvent,
+				onselectstart : $.cancelEvent
 			}, obj.ui.query('.puredom_taginput_taglist'));
 		},
-		
+
 		removeTag : function(obj, tag) {
 			obj.ui.query('.puredom_taginput_tag[data-tag]').each(function(node) {
 				if (node.attr('data-tag')===tag) {
@@ -88,7 +103,7 @@
 				}
 			});
 		},
-		
+
 		update : function(obj) {
 			var value = (obj.input.value() || '').replace(/(\s+\,\s+|\s+\,|\,\s+)/gim,','),
 				tags = value ? value.split(',') : [],
@@ -112,26 +127,25 @@
 			}
 			obj.currentTags = tags;
 		},
-		
+
 		enhance : function(input) {
 			this.destroy(input);
-		
+
 			var obj = {
 				input : input,
 				init : function() {
 					api.createUI(obj);
-					
+
 					obj.input.css({ display:'none' });
-					
+
 					obj.update();
-					
+
 					obj.input.on('change', obj.handlers.inputChanged);
 				},
 				update : function() {
 					api.update(obj);
 				},
 				destroy : function() {
-					console.log('destroying tag editor');
 					for (var x=api.objs.length; x--; ) {
 						if (api.objs[x]===obj) {
 							api.objs.splice(x, 1);
@@ -200,9 +214,9 @@
 						obj.update();
 					},
 					keydown : function(e) {
-						var me = puredom.el(this),
+						var me = $(this),
 							key = e.keyCode || e.which,
-							value = puredom.text.trim(me.value() || ''),
+							value = $.text.trim(me.value() || ''),
 							sel = me.selection(),
 							selected = obj.getSelected();
 						selected.declassify('selected');
@@ -211,18 +225,18 @@
 								me.value('');
 							}
 							if (value.length>0 || key===188) {
-								return puredom.cancelEvent(e);
+								return $.cancelEvent(e);
 							}
 						}
 						else if (key===27) {					// escape
 							me.value('').blur();
-							return puredom.cancelEvent(e);
+							return $.cancelEvent(e);
 						}
 						else if (key===8 || key===46) {			// backspace or del (backspace is <delete> on mac)
 							if (selected.exists()) {
 								obj.remove(selected.attr('data-tag'));
 								me.value('').focus();
-								return puredom.cancelEvent(e);
+								return $.cancelEvent(e);
 							}
 							else {
 								if (key===8 && (sel.start===sel.end && sel.start===0)) {
@@ -234,7 +248,6 @@
 							}
 						}
 						else if (key===37) {					// left
-							//console.log(sel);
 							if (!value || (sel.start===sel.end && sel.start===0)) {
 								if (selected.exists()) {
 									if (selected.previous().exists()) {
@@ -250,7 +263,7 @@
 										selected.classify('selected');
 									}
 								}
-								return puredom.cancelEvent(e);
+								return $.cancelEvent(e);
 							}
 						}
 						else if (key===39) {					// right
@@ -258,19 +271,19 @@
 								if (selected.next().exists()) {
 									selected.next().classify('selected');
 								}
-								return puredom.cancelEvent(e);
+								return $.cancelEvent(e);
 							}
 						}
 					},
 					tagClick : function(e) {
 						obj.handlers.grabFocus();
 						obj.ui.query('.puredom_taginput_tag.selected').declassify('selected');
-						puredom.el(this).classify('selected');
-						return puredom.cancelEvent(e);
+						$(this).classify('selected');
+						return $.cancelEvent(e);
 					},
 					removeClick : function(e) {
-						obj.remove(puredom.el(this).parent().attr('data-tag'));
-						return puredom.cancelEvent(e);
+						obj.remove($(this).parent().attr('data-tag'));
+						return $.cancelEvent(e);
 					},
 					grabFocus : function(e) {
 						obj.ui.query('input.puredom_taginput_input').focus();
@@ -282,21 +295,21 @@
 						obj.handlers.inputBlur.call(e);
 					},
 					inputBlur : function(e) {
-						var value = puredom.el(this).value();
+						var value = $(this).value();
 						obj.getSelected().declassify('selected');
 						obj.add(value,true);
-						puredom.el(this).value('');
+						$(this).value('');
 					}
 				}
 			};
-			
+
 			this.objs.push(obj);
-			
+
 			obj.init();
-			
+
 			input = null;
 		},
-		
+
 		setValue : function(input, value) {
 			var obj = this.getObjForInput(input);
 			input.value(value || '');
@@ -304,11 +317,11 @@
 				obj.update();
 			}
 		},
-		
+
 		getValue : function(input) {
 			return input.value();
 		},
-		
+
 		destroy : function(input) {
 			var obj = this.getObjForInput(input);
 			if (obj) {
@@ -316,8 +329,8 @@
 			}
 		},
 		unenhance : function(input) { this.destroy(input); },
-		
-		
+
+
 		getObjForInput : function(input) {
 			for (var x=this.objs.length; x--; ) {
 				if (this.objs[x].input._nodes[0]===input._nodes[0]) {
@@ -326,8 +339,10 @@
 			}
 			return false;
 		}
-		
+
 	};
-	
+
 	init();
-}());
+
+	return exports;
+}));
