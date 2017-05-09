@@ -1,5 +1,7 @@
 puredom-taginput
 ================
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/developit/puredom-taginput.svg)](https://greenkeeper.io/)
 A [puredom](http://puredom.org) plugin that adds support for `<input type="tag">` to forms wrapped in [puredom.FormHandler](http://puredom.org/docs/symbols/puredom.FormHandler.html).  
 It enhances input fields with an interactive list of tags, represented in field values as a comma-separated list.  
 
